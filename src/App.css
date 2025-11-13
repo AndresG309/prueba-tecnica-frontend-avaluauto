@@ -1,0 +1,98 @@
+body {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.content {
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    background: gray;
+    padding: 20px;
+    width: 80%;
+    height: 500px;
+    gap: 30px;
+}
+
+.content Header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 0, 0.255);
+    padding: 10px;
+    height: 300px;
+}
+
+.content .contentBody {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: rgba(0, 255, 255, 0.255);
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.addTaskButton {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    color: white;
+    padding: 5;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    font-size: 16px;
+}
+
+.tasksArea {
+    width: 100%;
+}
+.task {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 150px;
+}
+
+.completed {
+    background-color: red;
+}
+
+.expired {
+}
+
+.svgButton {
+    color: white;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+}
+
+.screenOverlay{
+    z-index: 99;
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px)
+}
+.floatingScreen {
+    position: relative;
+    z-index: 999;
+    width: 500px;
+    height: 300px;
+    background-color: rgba(120, 120, 120, 0.653);
+    display: flex;
+    flex-direction: column;
+}
