@@ -60,7 +60,19 @@ export function TaskForm({
                         <MdClose size={20} />
                     </button>
                 </div>
-                <div className="d-flex flex-column gap-3">
+
+                {/* Form */}
+                <form
+                    className="d-flex flex-column gap-3"
+                    onSubmit={() => {
+                        if (action === 'create') {
+                            createTaskFunction(currentData);
+                        } else {
+                            editTaskFunction(currentData);
+                        }
+                        closeFormFunction();
+                    }}
+                >
                     <div>
                         <label htmlFor="name" className="form-label">
                             Name
@@ -72,6 +84,7 @@ export function TaskForm({
                             placeholder="Enter task name"
                             value={currentData.name}
                             onChange={handleInputChange}
+                            required
                         />
                     </div>
 
@@ -118,7 +131,7 @@ export function TaskForm({
                         </select>
                     </div>
 
-                    <div>
+                    <div className="pb-2">
                         <label htmlFor="state" className="form-label">
                             State
                         </label>
@@ -133,26 +146,16 @@ export function TaskForm({
                             <option value="completed">Completed</option>
                         </select>
                     </div>
-                </div>
 
-                <div className="d-flex justify-content-end">
-                    <button
-                        className="btn btn-primary d-flex align-items-center"
-                        onClick={
-                            action === 'create'
-                                ? () => {
-                                      createTaskFunction(currentData);
-                                      closeFormFunction();
-                                  }
-                                : () => {
-                                      editTaskFunction(currentData);
-                                      closeFormFunction();
-                                  }
-                        }
-                    >
-                        {action === 'create' ? 'Create' : 'Save'}
-                    </button>
-                </div>
+                    <div className="d-flex justify-content-end">
+                        <button
+                            type="submit"
+                            className="btn btn-primary d-flex align-items-center"
+                        >
+                            {action === 'create' ? 'Create' : 'Save'}
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     );

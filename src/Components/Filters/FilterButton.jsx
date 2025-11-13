@@ -10,7 +10,14 @@ export function FilterButton({ icon, label, isActive, onClick }) {
             >
                 <Icon size={24} />
             </button>
-            <small className="text-center mt-1" style={{fontSize:12}}>{label}</small>
+            <small
+                className="text-center mt-1"
+                style={{
+                    fontSize: 12,
+                }}
+            >
+                {label}
+            </small>
         </div>
     );
 }

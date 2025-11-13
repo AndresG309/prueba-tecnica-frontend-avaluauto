@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MdEdit, MdDelete, MdWarning} from 'react-icons/md';
+import { MdEdit, MdDelete } from 'react-icons/md';
 
 export function Task({
     id,

@@ -6,7 +6,7 @@ import { TasksSummary } from './Components/Tasks/TasksSummary.jsx';
 import { FiltersPanel } from './Components/Filters/FiltersPanel.jsx';
 import { TaskForm } from './Components/Tasks/TaskForm.jsx';
 // Icons
-import { MdAdd } from 'react-icons/md';
+import { MdAdd, MdArrowUpward } from 'react-icons/md';
 
 function App() {
     // --------------- Variables
@@ -28,25 +28,6 @@ function App() {
     };
 
     // ------------- States
-    // const [tasksList, setTasksList] = useState([
-    //     {
-    //         id: uuidv4(),
-    //         name: 'Tarea',
-    //         description: 'Descripción tarea',
-    //         finalDate: '2020-11-12',
-    //         priority: priorityLevels.low,
-    //         state: states.pending,
-    //     },
-    //     {
-    //         id: uuidv4(),
-    //         name: 'Tarea',
-    //         description:
-    //             'Descripción tarea 2jqnwdo ndjo newjd nwoeifjb wpeifjb pweifb wpeiufb pweuofbwóiefn óinqd+wn qpwodbn qowidn qwiodnqwíodnqwí dn',
-    //         finalDate: '2020-11-12',
-    //         priority: priorityLevels.low,
-    //         state: states.completed,
-    //     },
-    // ]);
     const [tasksList, setTasksList] = useState(() => {
         return JSON.parse(localStorage.getItem('tasks')) || [];
     });
@@ -58,11 +39,27 @@ function App() {
     const [activeFilter, setActiveFilter] = useState(filters.all);
     const [activeSubFilter, setActiveSubFilter] = useState(subFilters.none);
     const [searchText, setSearchText] = useState('');
+    const [showScrollTop, setShowScrollTop] = useState(false);
 
     // ------------- Effects
     useEffect(() => {
         localStorage.setItem('tasks', JSON.stringify(tasksList));
     }, [tasksList]);
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 100) {
+                setShowScrollTop(true);
+            } else {
+                setShowScrollTop(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     // ------------- Functionalities
     // Task Handlers
@@ -104,6 +101,13 @@ function App() {
     function changeActiveSubFilter(newSubFilter) {
         setActiveSubFilter(newSubFilter);
     }
+    // Scroll Handlers
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    };
 
     // JSX
     return (
@@ -125,11 +129,11 @@ function App() {
                     onChange={(e) => setSearchText(e.target.value)}
                     className="form-control mb-3"
                 />
-                <div className="d-flex flex-row" style={{ minHeight: '500px' }}>
-                    <div
-                        className="bg-light rounded-pill p-2 position-fixed"
-                        style={{ zIndex: 10 }}
-                    >
+                <div
+                    className="d-flex flex-row"
+                    style={{ paddingBottom: '50px' }}
+                >
+                    <div className="bg-light rounded-pill p-2 align-self-start">
                         <FiltersPanel
                             filters={filters}
                             subFilters={subFilters}
@@ -155,13 +159,24 @@ function App() {
                         />
                     </div>
                 </div>
+            </div>
+            <div className="d-flex flex-column gap-2 position-fixed bottom-0 end-0 my-5 mx-3">
+                {showScrollTop && (
+                    <button
+                        className="btn p-1 btn-outline-primary d-flex justify-content-center align-items-center active"
+                        onClick={scrollToTop}
+                    >
+                        <MdArrowUpward size={24} />
+                    </button>
+                )}
                 <button
-                    className="btn p-1 btn-outline-success d-flex justify-content-center align-items-center position-fixed bottom-0 end-0 m-4"
+                    className="btn p-1 btn-outline-success d-flex justify-content-center align-items-center  active"
                     onClick={openCreateTaskForm}
                 >
                     <MdAdd size={24} />
                 </button>
             </div>
+
             {isShowingTaskForm && (
                 <TaskForm
                     action={taskFormAction}

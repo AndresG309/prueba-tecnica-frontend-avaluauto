@@ -153,10 +153,14 @@ export function FiltersPanel({
                     ? renderAllFiltersButtons()
                     : renderActiveFilterButton()}
             </div>
-            <hr />
-            <div className="d-flex flex-column gap-2">
-                {isChangingFilter ? null : renderSubFiltersButtons()}
-            </div>
+            {isChangingFilter ? null : (
+                <>
+                    {activeFilter !== filters.all ? <hr /> : null}
+                    <div className="d-flex flex-column gap-2">
+                        {renderSubFiltersButtons()}
+                    </div>
+                </>
+            )}
         </div>
     );
 }

@@ -5,8 +5,8 @@ export function TasksSummary({ tasks }) {
     const progress = total > 0 ? (completed / total) * 100 : 0;
 
     return (
-        <div className="w-75 mx-auto">
-            <div className="d-flex justify-content-between align-items-center bg-light rounded p-2 my-3 shadow-sm">
+        <div className="mx-auto" style={{ maxWidth: '800px' }}>
+            <div className="d-flex justify-content-between align-items-center bg-light rounded p-2 my-3 shadow-sm gap-2">
                 <span>
                     <strong>Total:</strong> {total}
                 </span>
