@@ -35,11 +35,17 @@ Construir una aplicación de gestión de tareas (To-Do Dashboard) con interfaz r
 El proyecto ha sido creado con Vite usando la plantilla de React y Javascript + SWC. La estructura de carpetas que presenta el proyecto es la siguiente:
 
 prueba-tecnica-frontend-avaluauto
+
 |--node_modules
+
 |--src
+
 |----Components
+
 |------Filters
+
 |------Tasks
+
 |_
 
 Se encuentra en la carpeta src los archivos .jsx principales (main.jsx y App.jsx) para mantener la lógica de react en un único lugar. Se encuentra una subcarpeta llamada "Components" que a su vez contiene  dos sub carpetas llamadas "Filters" y "Tasks", cada una destinada a almacenar los archivos .jsx relacionados con la ultilidad que marca el nombre de la carpeta.
@@ -80,5 +86,6 @@ R//
 
 - 7. ¿Podrías mencionar algún patrón de diseño que conozcas y explicar brevemente cómo 
 lo aplicarías en una aplicación web?
+
 
 R// 
