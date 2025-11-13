@@ -42,9 +42,11 @@ function App() {
     const [showScrollTop, setShowScrollTop] = useState(false);
 
     // ------------- Effects
+    // Storage
     useEffect(() => {
         localStorage.setItem('tasks', JSON.stringify(tasksList));
     }, [tasksList]);
+    // Window Scroll
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 100) {
@@ -53,9 +55,7 @@ function App() {
                 setShowScrollTop(false);
             }
         };
-
         window.addEventListener('scroll', handleScroll);
-
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
@@ -101,7 +101,7 @@ function App() {
     function changeActiveSubFilter(newSubFilter) {
         setActiveSubFilter(newSubFilter);
     }
-    // Scroll Handlers
+    // Window Scroll Handlers
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,

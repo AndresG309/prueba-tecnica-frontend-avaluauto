@@ -38,6 +38,9 @@ Construir una aplicación de gestión de tareas (To-Do Dashboard) con interfaz r
 - Las tareas se marcan con un borde rojo si la fecha límite ya ha pasado y aún no se completó (estado pendiente).
 - Si la tarea ya se completó, se marca con un borde verde, independiende de su fecha, y si no se ha completado pero aún no llega la fecha límite, se marca con un borde azul.
 - En caso que no haya fecha establecida, también se mantiene el borde azul.
+### Navegación por la página:
+- Se incluye un header fijado en la parte superior de la pantalla.
+- Cuando se hace scroll hacia abajo, se habilita un botón justo encima del botón de crear tarea, que sirve para volver automáticamente a la parte superior de la pantalla.
 ### Resumen dinámico:
 - Incluido en el header para facilitar el diseño y la visibilidad, se presenta un resumen que muestra el total de tareas creadas, la cantidad de tareas completas y la cantidad de tareas faltantes.
 - Se incluye una barra de progreso que carga el porcentaje de tareas completadas, en relación con el total de tareas.

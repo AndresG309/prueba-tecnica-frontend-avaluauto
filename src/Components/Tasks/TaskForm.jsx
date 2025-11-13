@@ -40,12 +40,13 @@ export function TaskForm({
     return (
         <div
             className="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex justify-content-center align-items-center"
-            style={{ backdropFilter: 'blur(4px)', zIndex: 999 }}
+            style={{ backdropFilter: 'blur(5px)', zIndex: 999 }}
         >
             <div
-                className="bg-light rounded shadow-lg p-4 overflow-auto"
+                className="bg-light rounded shadow-lg p-4"
                 style={{
-                    width: '500px',
+                    width: '90%',
+                    maxWidth: '500px',
                     maxHeight: '900px',
                 }}
             >
