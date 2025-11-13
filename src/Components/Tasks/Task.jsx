@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MdEdit, MdDelete } from 'react-icons/md';
+import { MdEdit, MdDelete, MdWarning} from 'react-icons/md';
 
 export function Task({
     id,
@@ -12,43 +12,76 @@ export function Task({
     deleteTaskFunction,
 }) {
     // Varibales
-    const MAX_DESCRIPTION_LENGTH = 100;
+    const MAX_DESCRIPTION_LENGTH = 80;
 
     // States
     const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
     // Functionalities
     function createClassName() {
-        let className = 'card shadow-sm';
+        let className = 'card border-3';
         const todaysDate = new Date().toISOString().split('T')[0];
         if (state === 'completed') {
             className += '  border-success';
-        }
-        if (todaysDate > finalDate && state !== 'completed') {
-            className += '  border-danger';
+        } else {
+            if (todaysDate > finalDate && finalDate != '') {
+                className += '  border-danger';
+            } else {
+                className += '  border-primary';
+            }
         }
         return className;
     }
     function toggleExpand() {
         setIsDescriptionExpanded(!isDescriptionExpanded);
     }
-    function setDisplayedDescription() {
+    function changeDescriptionDisplay() {
         if (isDescriptionExpanded) {
-            return description;
+            return description + ' ';
         } else if (description.length > MAX_DESCRIPTION_LENGTH) {
-            description.slice(0, MAX_DESCRIPTION_LENGTH) + '...';
-        } else return description;
+            return description.slice(0, MAX_DESCRIPTION_LENGTH) + '... ';
+        } else return description + ' ';
+    }
+    function packTaskData() {
+        return {
+            id,
+            name,
+            description,
+            finalDate,
+            priority,
+            state,
+        };
     }
 
+    // JSX
     return (
         <div className={createClassName()}>
             <div className="card-body d-flex gap-3">
                 {/* Task Info */}
                 <div className="d-flex w-100 flex-column">
                     <h3>{name}</h3>
-                    <span onClick={toggleExpand}>
+                    <span>
                         <strong>Descripción: </strong>
-                        {setDisplayedDescription()}
+                        {changeDescriptionDisplay()}
+                        {description.length < MAX_DESCRIPTION_LENGTH ? (
+                            ''
+                        ) : isDescriptionExpanded ? (
+                            <span
+                                className="text-decoration-underline"
+                                style={{ cursor: 'pointer' }}
+                                onClick={toggleExpand}
+                            >
+                                Ver menos
+                            </span>
+                        ) : (
+                            <span
+                                className="text-decoration-underline"
+                                style={{ cursor: 'pointer' }}
+                                onClick={toggleExpand}
+                            >
+                                Ver más
+                            </span>
+                        )}
                     </span>
                     <span>
                         <strong>Fecha: </strong>
@@ -77,7 +110,7 @@ export function Task({
                 <div className="d-flex flex-column gap-2 justify-content-center">
                     <button
                         className="btn p-1 btn-outline-primary d-flex justify-content-center align-items-center"
-                        onClick={editTaskFunction}
+                        onClick={() => editTaskFunction(packTaskData())}
                     >
                         <MdEdit size={24} />
                     </button>
